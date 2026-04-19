@@ -1,0 +1,2083 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --ink: #0f0e0c;
+      --paper: #f5f2ec;
+      --accent: #f0a500;
+      --accent2: #e05c2a;
+      --muted: #7a7670;
+      --border: rgba(15, 14, 12, 0.12);
+      --card: #fff;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: .03;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(245, 242, 236, .9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -.5px;
+    }
+
+    .logo span {
+      color: var(--accent2);
+    }
+
+    .nav-cta {
+      background: var(--ink);
+      color: var(--paper);
+      border: none;
+      padding: 10px 22px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: .15s;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent2);
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      padding: 80px 48px 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: var(--ink);
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero-tag::before {
+      content: '●';
+      font-size: 8px;
+      animation: blink 1.4s ease infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .2
+      }
+    }
+
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(36px, 5vw, 58px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 20px;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--accent2);
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 420px;
+      margin-bottom: 36px;
+    }
+
+    /* Stats strip */
+    .stats {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 40px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ═══════════════════════════════════════════
+   DASHBOARD MOCKUP — Ultra-realistic Power BI
+   ═══════════════════════════════════════════ */
+    .dashboard-wrap {
+      background: #141420;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow:
+        0 50px 120px rgba(15, 14, 12, .40),
+        0 20px 40px rgba(15, 14, 12, .20),
+        0 0 0 1px rgba(255, 255, 255, .08);
+      transform: perspective(1000px) rotateY(-6deg) rotateX(3.5deg);
+      transition: transform .6s cubic-bezier(0.22, 1, 0.36, 1);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 10px;
+      user-select: none;
+    }
+
+    .dashboard-wrap:hover {
+      transform: perspective(1000px) rotateY(-1deg) rotateX(0.5deg);
+    }
+
+    /* ── Title bar (OS chrome) ── */
+    .db-titlebar {
+      background: #0d0d18;
+      padding: 7px 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+    }
+
+    .db-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: filter .2s;
+    }
+
+    .db-dot:hover {
+      filter: brightness(1.4);
+    }
+
+    .db-dot:nth-child(1) {
+      background: #ff5f57
+    }
+
+    .db-dot:nth-child(2) {
+      background: #febc2e
+    }
+
+    .db-dot:nth-child(3) {
+      background: #28c840
+    }
+
+    .db-titlebar-label {
+      flex: 1;
+      text-align: center;
+      font-size: 8.5px;
+      color: rgba(255, 255, 255, .2);
+      letter-spacing: .3px;
+    }
+
+    /* ── Power BI ribbon ── */
+    .db-ribbon {
+      background: #1c1b2e;
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .db-ribbon-logo {
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      border-right: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .db-pbi-icon {
+      width: 16px;
+      height: 16px;
+      position: relative;
+    }
+
+    .db-pbi-icon span {
+      position: absolute;
+      bottom: 0;
+      border-radius: 1.5px;
+      background: #f0a500;
+    }
+
+    .db-pbi-icon span:nth-child(1) {
+      left: 0;
+      width: 4px;
+      height: 7px;
+      opacity: .6;
+    }
+
+    .db-pbi-icon span:nth-child(2) {
+      left: 5px;
+      width: 4px;
+      height: 11px;
+      opacity: .8;
+    }
+
+    .db-pbi-icon span:nth-child(3) {
+      left: 10px;
+      width: 4px;
+      height: 16px;
+    }
+
+    .db-pbi-wordmark {
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -.3px;
+    }
+
+    .db-pbi-wordmark em {
+      color: #f0a500;
+      font-style: normal;
+    }
+
+    .db-ribbon-tab {
+      padding: 6px 10px;
+      font-size: 8.5px;
+      color: rgba(255, 255, 255, .35);
+      cursor: pointer;
+      transition: color .15s;
+      border-bottom: 2px solid transparent;
+    }
+
+    .db-ribbon-tab.active {
+      color: #f0a500;
+      border-bottom-color: #f0a500;
+    }
+
+    .db-ribbon-tab:hover:not(.active) {
+      color: rgba(255, 255, 255, .7);
+    }
+
+    .db-ribbon-spacer {
+      flex: 1;
+    }
+
+    .db-ribbon-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 10px;
+    }
+
+    .db-action-btn {
+      font-size: 7.5px;
+      color: rgba(255, 255, 255, .35);
+      padding: 3px 8px;
+      background: rgba(255, 255, 255, .06);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background .15s, color .15s;
+    }
+
+    .db-action-btn:hover {
+      background: rgba(255, 255, 255, .12);
+      color: rgba(255, 255, 255, .8);
+    }
+
+    .db-action-btn.primary {
+      background: rgba(240, 165, 0, .2);
+      color: #f0a500;
+    }
+
+    /* ── Main layout: sidebar + workspace ── */
+    .db-layout {
+      display: flex;
+      height: 340px;
+    }
+
+    /* Sidebar */
+    .db-sidebar {
+      width: 42px;
+      background: #111120;
+      border-right: 1px solid rgba(255, 255, 255, .05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 0;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .db-nav-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background .15s, transform .15s;
+      position: relative;
+    }
+
+    .db-nav-icon.active {
+      background: rgba(240, 165, 0, .18);
+    }
+
+    .db-nav-icon:not(.active):hover {
+      background: rgba(255, 255, 255, .07);
+      transform: scale(1.08);
+    }
+
+    .db-nav-icon.active::after {
+      content: '';
+      position: absolute;
+      right: -1px;
+      width: 2px;
+      height: 16px;
+      background: #f0a500;
+      border-radius: 2px;
+    }
+
+    .db-sidebar-sep {
+      width: 20px;
+      height: 1px;
+      background: rgba(255, 255, 255, .07);
+      margin: 3px 0;
+    }
+
+    /* Filter bar */
+    .db-filterbar {
+      background: #1a1928;
+      padding: 5px 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid rgba(255, 255, 255, .05);
+    }
+
+    .db-filter-label {
+      font-size: 7.5px;
+      color: rgba(255, 255, 255, .3);
+      margin-right: 2px;
+      flex-shrink: 0;
+    }
+
+    .db-filter-chip {
+      font-size: 7.5px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, .1);
+      color: rgba(255, 255, 255, .55);
+      cursor: pointer;
+      transition: all .15s;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .db-filter-chip.sel {
+      background: rgba(240, 165, 0, .15);
+      border-color: rgba(240, 165, 0, .4);
+      color: #f0a500;
+    }
+
+    .db-filter-chip:hover:not(.sel) {
+      background: rgba(255, 255, 255, .06);
+    }
+
+    .db-filter-chip svg {
+      width: 7px;
+      height: 7px;
+    }
+
+    .db-filter-sep {
+      width: 1px;
+      height: 12px;
+      background: rgba(255, 255, 255, .07);
+      margin: 0 3px;
+    }
+
+    .db-filter-search {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, .05);
+      border-radius: 5px;
+      padding: 2px 7px;
+      border: 1px solid rgba(255, 255, 255, .07);
+    }
+
+    .db-filter-search span {
+      font-size: 7.5px;
+      color: rgba(255, 255, 255, .2);
+    }
+
+    /* Page workspace */
+    .db-workspace {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Dashboard page header */
+    .db-page-header {
+      padding: 8px 12px 5px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .db-page-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .9);
+      letter-spacing: -.2px;
+    }
+
+    .db-page-sub {
+      font-size: 7.5px;
+      color: rgba(255, 255, 255, .3);
+      margin-top: 1.5px;
+    }
+
+    .db-page-badges {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .db-live-badge {
+      background: rgba(74, 222, 128, .12);
+      color: #4ade80;
+      border: 1px solid rgba(74, 222, 128, .22);
+      font-size: 7px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      letter-spacing: .3px;
+    }
+
+    .db-live-badge::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: blink 1.4s ease infinite;
+      flex-shrink: 0;
+    }
+
+    .db-ts {
+      font-size: 7px;
+      color: rgba(255, 255, 255, .22);
+    }
+
+    /* KPI strip */
+    .db-kpis {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
+      padding: 0 10px 6px;
+    }
+
+    .db-kpi {
+      background: #1f1f35;
+      border: 1px solid rgba(255, 255, 255, .07);
+      border-radius: 8px;
+      padding: 7px 9px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .2s;
+      cursor: default;
+    }
+
+    .db-kpi:hover {
+      border-color: rgba(240, 165, 0, .3);
+    }
+
+    .db-kpi-icon {
+      font-size: 11px;
+      margin-bottom: 3px;
+    }
+
+    .db-kpi-label {
+      font-size: 7.5px;
+      color: rgba(255, 255, 255, .35);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 2px;
+    }
+
+    .db-kpi-val {
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .db-kpi-delta {
+      font-size: 7.5px;
+      font-weight: 600;
+      margin-top: 3px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .up {
+      color: #4ade80;
+    }
+
+    .dn {
+      color: #f87171;
+    }
+
+    .nt {
+      color: #94a3b8;
+    }
+
+    .db-kpi-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: rgba(255, 255, 255, .06);
+    }
+
+    .db-kpi-bar-fill {
+      height: 100%;
+      border-radius: 0 2px 0 0;
+      background: linear-gradient(90deg, #f0a500, #e05c2a);
+    }
+
+    .db-kpi-spark {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      opacity: .3;
+      pointer-events: none;
+    }
+
+    /* Charts grid */
+    .db-grid {
+      display: grid;
+      grid-template-columns: 3fr 1.7fr;
+      gap: 5px;
+      padding: 0 10px 5px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .db-card {
+      background: #1f1f35;
+      border: 1px solid rgba(255, 255, 255, .07);
+      border-radius: 8px;
+      padding: 8px 9px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: border-color .2s;
+    }
+
+    .db-card:hover {
+      border-color: rgba(255, 255, 255, .14);
+    }
+
+    .db-card-hdr {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      flex-shrink: 0;
+    }
+
+    .db-card-title {
+      font-size: 8.5px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .65);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .db-card-pills {
+      display: flex;
+      gap: 3px;
+    }
+
+    .db-pill {
+      font-size: 7px;
+      color: rgba(255, 255, 255, .3);
+      background: rgba(255, 255, 255, .06);
+      border-radius: 4px;
+      padding: 1.5px 5px;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .db-pill.act {
+      background: rgba(240, 165, 0, .15);
+      color: #f0a500;
+    }
+
+    /* SVG area chart */
+    .db-areachart {
+      flex: 1;
+      width: 100%;
+      min-height: 0;
+      overflow: visible;
+    }
+
+    /* Axis labels */
+    .db-axis-label {
+      font-size: 6.5px;
+      fill: rgba(255, 255, 255, .22);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Animated area path */
+    .db-area-path {
+      stroke-dasharray: 500;
+      stroke-dashoffset: 500;
+      animation: drawLine 1.6s cubic-bezier(0.22, 1, 0.36, 1) .3s forwards;
+    }
+
+    @keyframes drawLine {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .db-area-fill {
+      opacity: 0;
+      animation: fadeIn .8s ease 1.2s forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Tooltip dot */
+    .db-chart-dot {
+      fill: #f0a500;
+      stroke: #141420;
+      stroke-width: 2;
+      opacity: 0;
+      animation: popDot .3s ease forwards;
+    }
+
+    @keyframes popDot {
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Animated bars */
+    .db-b {
+      transform-origin: bottom;
+      transform: scaleY(0);
+      animation: barUp .7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes barUp {
+      to {
+        transform: scaleY(1);
+      }
+    }
+
+    /* Donut / ring */
+    .db-ring-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .db-ring-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .db-ring-row {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .db-ring-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .db-ring-name {
+      font-size: 7.5px;
+      color: rgba(255, 255, 255, .5);
+    }
+
+    .db-ring-val {
+      font-size: 7.5px;
+      color: rgba(255, 255, 255, .8);
+      font-weight: 700;
+      margin-left: auto;
+      padding-left: 6px;
+    }
+
+    /* Bottom row */
+    .db-bottom {
+      display: grid;
+      grid-template-columns: 5fr 3fr;
+      gap: 5px;
+      padding: 0 10px 8px;
+    }
+
+    /* Table */
+    .db-tbl {
+      background: #1f1f35;
+      border: 1px solid rgba(255, 255, 255, .07);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .db-tbl-hdr,
+    .db-tbl-row {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      padding: 4px 9px;
+    }
+
+    .db-tbl-hdr {
+      background: rgba(255, 255, 255, .03);
+      border-bottom: 1px solid rgba(255, 255, 255, .05);
+    }
+
+    .db-tbl-hdr span {
+      font-size: 7px;
+      color: rgba(255, 255, 255, .28);
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+
+    .db-tbl-row {
+      border-bottom: 1px solid rgba(255, 255, 255, .03);
+      transition: background .12s;
+    }
+
+    .db-tbl-row:last-child {
+      border-bottom: none;
+    }
+
+    .db-tbl-row:hover {
+      background: rgba(255, 255, 255, .04);
+    }
+
+    .db-tbl-row span {
+      font-size: 8px;
+      color: rgba(255, 255, 255, .55);
+      display: flex;
+      align-items: center;
+    }
+
+    .db-tbl-row span.rn {
+      color: rgba(255, 255, 255, .85);
+      font-weight: 600;
+      gap: 4px;
+    }
+
+    .db-tbl-row span.rn::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .db-tbl-row:nth-child(2) span.rn::before {
+      background: #f0a500;
+    }
+
+    .db-tbl-row:nth-child(3) span.rn::before {
+      background: #e05c2a;
+    }
+
+    .db-tbl-row:nth-child(4) span.rn::before {
+      background: #a78bfa;
+    }
+
+    .db-tbl-row:nth-child(5) span.rn::before {
+      background: #38bdf8;
+    }
+
+    .g {
+      color: #4ade80 !important;
+    }
+
+    .o {
+      color: #f0a500 !important;
+    }
+
+    .r {
+      color: #f87171 !important;
+    }
+
+    /* Progress bars card */
+    .db-progress-card {
+      background: #1f1f35;
+      border: 1px solid rgba(255, 255, 255, .07);
+      border-radius: 8px;
+      padding: 8px 9px;
+    }
+
+    .db-prog-row {
+      margin-bottom: 6px;
+    }
+
+    .db-prog-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .db-prog-top {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 3px;
+    }
+
+    .db-prog-name {
+      font-size: 7.5px;
+      color: rgba(255, 255, 255, .55);
+    }
+
+    .db-prog-pct {
+      font-size: 7.5px;
+      font-weight: 700;
+    }
+
+    .db-prog-track {
+      height: 5px;
+      background: rgba(255, 255, 255, .07);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .db-prog-fill {
+      height: 100%;
+      border-radius: 3px;
+      transform-origin: left;
+      transform: scaleX(0);
+      animation: scaleRight .9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes scaleRight {
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    /* SECTIONS */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 48px;
+    }
+
+    .section-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    /* SERVICES */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 48px;
+    }
+
+    .service-card {
+      background: var(--card);
+      padding: 32px 28px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: .2s;
+    }
+
+    .service-card:hover {
+      background: var(--ink);
+    }
+
+    .service-card:hover .sc-title,
+    .service-card:hover .sc-desc {
+      color: var(--paper);
+    }
+
+    .service-card:hover .sc-num {
+      color: rgba(245, 242, 236, .15);
+    }
+
+    .service-card:first-child {
+      border-radius: 12px 0 0 12px;
+    }
+
+    .service-card:last-child {
+      border-radius: 0 12px 12px 0;
+    }
+
+    .sc-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 72px;
+      font-weight: 800;
+      color: rgba(15, 14, 12, .06);
+      position: absolute;
+      top: -8px;
+      right: 12px;
+      line-height: 1;
+      transition: .2s;
+    }
+
+    .sc-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0 0 10px;
+      position: relative;
+      z-index: 1;
+      transition: .2s;
+    }
+
+    .sc-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      transition: .2s;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* HOW IT WORKS - Animated Steps */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 56px;
+      position: relative;
+    }
+
+    /* Animated connecting line */
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: calc(12.5%);
+      right: calc(12.5%);
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--border) 10%, var(--border) 90%, transparent);
+      z-index: 0;
+    }
+
+    /* Animated progress line on top of static one */
+    .steps::after {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: calc(12.5%);
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      z-index: 1;
+      transition: width 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .steps.line-animated::after {
+      width: 75%;
+    }
+
+    .step {
+      text-align: center;
+      padding: 0 16px;
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .step.step-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .step:nth-child(1) {
+      transition-delay: 0.1s;
+    }
+
+    .step:nth-child(2) {
+      transition-delay: 0.3s;
+    }
+
+    .step:nth-child(3) {
+      transition-delay: 0.5s;
+    }
+
+    .step:nth-child(4) {
+      transition-delay: 0.7s;
+    }
+
+    /* Number bubble */
+    .step-num {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--paper);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      margin: 0 auto 20px;
+      position: relative;
+      transition: background 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+      box-shadow: 0 0 0 0px rgba(240, 165, 0, 0);
+    }
+
+    /* Ripple ring on each bubble */
+    .step-num::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      opacity: 0;
+      transform: scale(0.7);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    /* Pulse ring animation when step becomes active */
+    .step-num::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0;
+      transform: scale(1);
+      animation: none;
+    }
+
+    .step.step-visible .step-num::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .step.step-visible .step-num {
+      animation: stepPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .step:nth-child(1).step-visible .step-num {
+      animation-delay: 0.1s;
+    }
+
+    .step:nth-child(2).step-visible .step-num {
+      animation-delay: 0.3s;
+    }
+
+    .step:nth-child(3).step-visible .step-num {
+      animation-delay: 0.5s;
+    }
+
+    .step:nth-child(4).step-visible .step-num {
+      animation-delay: 0.7s;
+    }
+
+    @keyframes stepPop {
+      0% {
+        transform: scale(0.7);
+        background: var(--ink);
+      }
+
+      50% {
+        transform: scale(1.15);
+        background: var(--accent2);
+      }
+
+      100% {
+        transform: scale(1);
+        background: var(--ink);
+      }
+    }
+
+    /* Floating icon above each step */
+    .step-icon {
+      font-size: 22px;
+      display: block;
+      margin-bottom: 10px;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .step.step-visible .step-icon {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .step:nth-child(1).step-visible .step-icon {
+      transition-delay: 0.25s;
+    }
+
+    .step:nth-child(2).step-visible .step-icon {
+      transition-delay: 0.45s;
+    }
+
+    .step:nth-child(3).step-visible .step-icon {
+      transition-delay: 0.65s;
+    }
+
+    .step:nth-child(4).step-visible .step-icon {
+      transition-delay: 0.85s;
+    }
+
+    /* Card background effect on hover */
+    .step-inner {
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 16px;
+      padding: 24px 16px 20px;
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+      cursor: default;
+    }
+
+    .step-inner:hover {
+      background: var(--card);
+      border-color: var(--border);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(15, 14, 12, 0.1);
+    }
+
+    .step-inner:hover .step-num {
+      background: var(--accent2);
+      transform: scale(1.08) rotate(-5deg);
+      box-shadow: 0 8px 24px rgba(224, 92, 42, 0.35);
+    }
+
+    .step-inner:hover .step-num::before {
+      opacity: 0;
+    }
+
+    .step-title {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .step-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Animated sparkle dots on the connector line */
+    @keyframes dotTravel {
+      0% {
+        left: calc(12.5%);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 1;
+      }
+
+      100% {
+        left: calc(87.5%);
+        opacity: 0;
+      }
+    }
+
+    .step-connector-dot {
+      position: absolute;
+      top: 23px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      z-index: 3;
+      opacity: 0;
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    .step-connector-dot:nth-child(1) {
+      animation: dotTravel 3s linear 1.2s infinite;
+    }
+
+    .step-connector-dot:nth-child(2) {
+      animation: dotTravel 3s linear 2.2s infinite;
+    }
+
+    .step-connector-dot:nth-child(3) {
+      animation: dotTravel 3s linear 3.2s infinite;
+    }
+
+    /* FORM */
+    .form-section {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 80px 48px;
+    }
+
+    .form-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .form-left h2 {
+      color: var(--paper);
+    }
+
+    .form-left h2 em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .form-left p {
+      color: rgba(245, 242, 236, .6);
+      font-size: 15px;
+      line-height: 1.7;
+      margin-top: 16px;
+    }
+
+    .form-perks {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .perk {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+    }
+
+    .perk::before {
+      content: '✓';
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+      display: inline-flex;
+    }
+
+    .form-right {
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      color: rgba(245, 242, 236, .5);
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 8px;
+      padding: 11px 14px;
+      color: var(--paper);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: .15s;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(245, 242, 236, .3);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+      background: rgba(240, 165, 0, .08);
+    }
+
+    .form-group select {
+      appearance: none;
+      cursor: pointer;
+    }
+
+    option {
+      background: #1a1916;
+    }
+
+    .form-group textarea {
+      resize: none;
+      height: 90px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background: var(--accent);
+      color: var(--ink);
+      border: none;
+      border-radius: 8px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .15s;
+      letter-spacing: -.3px;
+    }
+
+    .submit-btn:hover {
+      background: #ffc840;
+      transform: translateY(-1px);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .form-note {
+      text-align: center;
+      font-size: 12px;
+      color: rgba(245, 242, 236, .35);
+      margin-top: 14px;
+    }
+
+    /* SUCCESS */
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 32px 0;
+    }
+
+    .success-msg .check {
+      width: 56px;
+      height: 56px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin: 0 auto 16px;
+    }
+
+    .success-msg h3 {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      color: var(--paper);
+      margin-bottom: 8px;
+    }
+
+    .success-msg p {
+      font-size: 14px;
+      color: rgba(245, 242, 236, .55);
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 32px 48px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ENTRANCE ANIMATIONS */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    [data-reveal].visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 16px 20px;
+      }
+
+      .hero,
+      .form-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .hero {
+        padding: 48px 20px 40px;
+      }
+
+      .section {
+        padding: 60px 20px;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+
+      .service-card:first-child {
+        border-radius: 12px 12px 0 0;
+      }
+
+      .service-card:last-child {
+        border-radius: 0 0 12px 12px;
+      }
+
+      .steps {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
+      .steps::before,
+      .steps::after {
+        display: none;
+      }
+
+      .step-connector-dot {
+        display: none;
+      }
+
+      .form-section {
+        padding: 60px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="noise"></div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">data<span>visual</span></div>
+    <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get a free
+      audit →</button>
+  </nav>
+
+  <!-- HERO -->
+  <section style="max-width:1100px;margin:0 auto;">
+    <div class="hero">
+      <div>
+        <div class="hero-tag" data-reveal>Available for new clients</div>
+        <h1 data-reveal>Your raw data,<br>turned into <em>decisions.</em></h1>
+        <p class="hero-sub" data-reveal>I build Power BI dashboards that transform your spreadsheets and databases into
+          interactive insights — so you can stop guessing and start growing.</p>
+        <div class="stats" data-reveal>
+          <div>
+            <div class="stat-num">48h</div>
+            <div class="stat-label">Avg. delivery</div>
+          </div>
+          <div>
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Custom-built</div>
+          </div>
+          <div>
+            <div class="stat-num">Free</div>
+            <div class="stat-label">Initial consultation</div>
+          </div>
+        </div>
+        <button class="nav-cta" style="border-radius:8px;padding:14px 28px;font-size:15px;"
+          onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+          Get your free audit →
+        </button>
+      </div>
+
+      <!-- DASHBOARD MOCKUP -->
+      <div class="dashboard-wrap" data-reveal>
+
+        <!-- OS title bar -->
+        <div class="db-titlebar">
+          <div class="db-dot"></div>
+          <div class="db-dot"></div>
+          <div class="db-dot"></div>
+          <span class="db-titlebar-label">Microsoft Power BI Desktop — Sales Overview FY26</span>
+        </div>
+
+        <!-- Power BI ribbon -->
+        <div class="db-ribbon">
+          <div class="db-ribbon-logo">
+            <div class="db-pbi-icon"><span></span><span></span><span></span></div>
+            <span class="db-pbi-wordmark">Power<em>BI</em></span>
+          </div>
+          <div class="db-ribbon-tab active">Report</div>
+          <div class="db-ribbon-tab">Data</div>
+          <div class="db-ribbon-tab">Model</div>
+          <div class="db-ribbon-spacer"></div>
+          <div class="db-ribbon-actions">
+            <div class="db-action-btn">Refresh</div>
+            <div class="db-action-btn primary">↑ Publish</div>
+          </div>
+        </div>
+
+        <div class="db-layout">
+          <!-- Sidebar nav -->
+          <div class="db-sidebar">
+            <div class="db-nav-icon active">📊</div>
+            <div class="db-nav-icon">📋</div>
+            <div class="db-sidebar-sep"></div>
+            <div class="db-nav-icon">🔍</div>
+            <div class="db-nav-icon">🔗</div>
+            <div class="db-sidebar-sep"></div>
+            <div class="db-nav-icon">⚙️</div>
+          </div>
+
+          <!-- Workspace -->
+          <div class="db-workspace">
+
+            <!-- Filter bar -->
+            <div class="db-filterbar">
+              <span class="db-filter-label">FILTERS</span>
+              <div class="db-filter-chip sel">FY 2025–26</div>
+              <div class="db-filter-chip sel">All Regions ▾</div>
+              <div class="db-filter-chip">Product ▾</div>
+              <div class="db-filter-chip">Channel ▾</div>
+              <div class="db-filter-sep"></div>
+              <div class="db-filter-chip">+ Add filter</div>
+              <div class="db-filter-search">
+                <span>🔍 Search visuals…</span>
+              </div>
+            </div>
+
+            <!-- Page title -->
+            <div class="db-page-header">
+              <div>
+                <div class="db-page-title">Sales Overview — FY 2025–26</div>
+                <div class="db-page-sub">Last refreshed: Today, 09:41 AM IST · Auto-refresh every 15 min</div>
+              </div>
+              <div class="db-page-badges">
+                <div class="db-live-badge">LIVE</div>
+                <div class="db-ts">Apr 13, 2026</div>
+              </div>
+            </div>
+
+            <!-- KPI cards -->
+            <div class="db-kpis">
+              <div class="db-kpi">
+                <div class="db-kpi-icon">💰</div>
+                <div class="db-kpi-label">Total Revenue</div>
+                <div class="db-kpi-val">₹42.6L</div>
+                <div class="db-kpi-delta up">▲ 14.3% MoM</div>
+                <div class="db-kpi-bar">
+                  <div class="db-kpi-bar-fill" style="width:86%"></div>
+                </div>
+                <svg class="db-kpi-spark" width="54" height="24" viewBox="0 0 54 24">
+                  <polyline points="0,20 9,16 18,17 27,10 36,12 45,6 54,3" fill="none" stroke="#4ade80"
+                    stroke-width="1.5" />
+                </svg>
+              </div>
+              <div class="db-kpi">
+                <div class="db-kpi-icon">📦</div>
+                <div class="db-kpi-label">Total Orders</div>
+                <div class="db-kpi-val">3,841</div>
+                <div class="db-kpi-delta up">▲ 8.1% MoM</div>
+                <div class="db-kpi-bar">
+                  <div class="db-kpi-bar-fill" style="width:68%"></div>
+                </div>
+                <svg class="db-kpi-spark" width="54" height="24" viewBox="0 0 54 24">
+                  <polyline points="0,18 9,14 18,16 27,9 36,11 45,8 54,5" fill="none" stroke="#f0a500"
+                    stroke-width="1.5" />
+                </svg>
+              </div>
+              <div class="db-kpi">
+                <div class="db-kpi-icon">🛒</div>
+                <div class="db-kpi-label">Avg. Order Value</div>
+                <div class="db-kpi-val">₹1,109</div>
+                <div class="db-kpi-delta dn">▼ 2.4% MoM</div>
+                <div class="db-kpi-bar">
+                  <div class="db-kpi-bar-fill" style="width:44%;background:linear-gradient(90deg,#f87171,#e05c2a)">
+                  </div>
+                </div>
+                <svg class="db-kpi-spark" width="54" height="24" viewBox="0 0 54 24">
+                  <polyline points="0,6 9,8 18,7 27,12 36,14 45,17 54,19" fill="none" stroke="#f87171"
+                    stroke-width="1.5" />
+                </svg>
+              </div>
+              <div class="db-kpi">
+                <div class="db-kpi-icon">📈</div>
+                <div class="db-kpi-label">Gross Margin</div>
+                <div class="db-kpi-val">38.7%</div>
+                <div class="db-kpi-delta up">▲ 1.9% MoM</div>
+                <div class="db-kpi-bar">
+                  <div class="db-kpi-bar-fill" style="width:72%;background:linear-gradient(90deg,#a78bfa,#7c3aed)">
+                  </div>
+                </div>
+                <svg class="db-kpi-spark" width="54" height="24" viewBox="0 0 54 24">
+                  <polyline points="0,16 9,13 18,14 27,9 36,10 45,6 54,4" fill="none" stroke="#a78bfa"
+                    stroke-width="1.5" />
+                </svg>
+              </div>
+            </div>
+
+
+
+            <!-- Bottom: table + product progress -->
+            <div class="db-bottom">
+              <div class="db-tbl">
+                <div class="db-tbl-hdr">
+                  <span>Region</span><span>Revenue</span><span>Orders</span><span>Growth</span>
+                </div>
+                <div class="db-tbl-row">
+                  <span class="rn">South Zone</span><span>₹14.2L</span><span>1,340</span><span class="g">▲ 18%</span>
+                </div>
+                <div class="db-tbl-row">
+                  <span class="rn">West Zone</span><span>₹11.8L</span><span>1,021</span><span class="g">▲ 11%</span>
+                </div>
+                <div class="db-tbl-row">
+                  <span class="rn">North Zone</span><span>₹9.4L</span><span>882</span><span class="o">▲ 4%</span>
+                </div>
+                <div class="db-tbl-row">
+                  <span class="rn">East Zone</span><span>₹7.2L</span><span>598</span><span class="r">▼ 2%</span>
+                </div>
+              </div>
+
+              <div class="db-progress-card">
+                <div class="db-card-hdr" style="margin-bottom:8px;">
+                  <span class="db-card-title">Top Products</span>
+                </div>
+                <div class="db-prog-row">
+                  <div class="db-prog-top">
+                    <span class="db-prog-name">SmartDash Pro</span>
+                    <span class="db-prog-pct" style="color:#f0a500">87%</span>
+                  </div>
+                  <div class="db-prog-track">
+                    <div class="db-prog-fill"
+                      style="width:87%;background:linear-gradient(90deg,#f0a500,#e05c2a);animation-delay:.3s"></div>
+                  </div>
+                </div>
+                <div class="db-prog-row">
+                  <div class="db-prog-top">
+                    <span class="db-prog-name">DataLens Basic</span>
+                    <span class="db-prog-pct" style="color:#e05c2a">64%</span>
+                  </div>
+                  <div class="db-prog-track">
+                    <div class="db-prog-fill"
+                      style="width:64%;background:linear-gradient(90deg,#e05c2a,#f87171);animation-delay:.5s"></div>
+                  </div>
+                </div>
+                <div class="db-prog-row">
+                  <div class="db-prog-top">
+                    <span class="db-prog-name">InsightBoard</span>
+                    <span class="db-prog-pct" style="color:#a78bfa">49%</span>
+                  </div>
+                  <div class="db-prog-track">
+                    <div class="db-prog-fill"
+                      style="width:49%;background:linear-gradient(90deg,#a78bfa,#7c3aed);animation-delay:.7s"></div>
+                  </div>
+                </div>
+                <div class="db-prog-row">
+                  <div class="db-prog-top">
+                    <span class="db-prog-name">ReportKit Lite</span>
+                    <span class="db-prog-pct" style="color:rgba(255,255,255,.4)">31%</span>
+                  </div>
+                  <div class="db-prog-track">
+                    <div class="db-prog-fill" style="width:31%;background:rgba(255,255,255,.2);animation-delay:.9s">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /db-workspace -->
+        </div><!-- /db-layout -->
+      </div><!-- /dashboard-wrap -->
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section">
+    <div class="section-tag" data-reveal>What I do</div>
+    <h2 data-reveal>One skill,<br>powerful results.</h2>
+    <div class="services-grid" data-reveal>
+      <div class="service-card">
+        <span class="sc-num">01</span>
+        <div class="sc-title">Sales & Revenue Dashboards</div>
+        <div class="sc-desc">Track every rupee — revenue by region, product, sales rep. Real-time filters so you know
+          what's working right now.</div>
+      </div>
+      <div class="service-card">
+        <span class="sc-num">02</span>
+        <div class="sc-title">Operations & Inventory</div>
+        <div class="sc-desc">Reduce waste, spot slowdowns. Visualise your supply chain, stock levels, and order
+          fulfilment in one place.</div>
+      </div>
+      <div class="service-card">
+        <span class="sc-num">03</span>
+        <div class="sc-title">Finance & KPI Reports</div>
+        <div class="sc-desc">Monthly P&L, burn rate, margins — built as interactive reports your team can actually use,
+          not static PDFs.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" style="padding-top:0;">
+    <div class="section-tag" data-reveal>Process</div>
+    <h2 data-reveal>Simple, fast,<br>no tech knowledge needed.</h2>
+    <div class="steps" id="steps-container">
+      <!-- travelling dots on the connector line -->
+      <div class="step-connector-dot"></div>
+      <div class="step-connector-dot"></div>
+      <div class="step-connector-dot"></div>
+
+      <div class="step">
+        <div class="step-inner">
+          <span class="step-icon">📁</span>
+          <div class="step-num">1</div>
+          <div class="step-title">Share your data</div>
+          <div class="step-desc">Excel, Google Sheets, database — anything works. I'll handle the cleaning.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-inner">
+          <span class="step-icon">🎯</span>
+          <div class="step-num">2</div>
+          <div class="step-title">We align on goals</div>
+          <div class="step-desc">30-min call to understand what decisions you need the dashboard to drive.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-inner">
+          <span class="step-icon">⚡</span>
+          <div class="step-num">3</div>
+          <div class="step-title">Dashboard built</div>
+          <div class="step-desc">Delivered within 48 hours. Fully interactive, branded, ready to share.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-inner">
+          <span class="step-icon">🚀</span>
+          <div class="step-num">4</div>
+          <div class="step-title">Insights, your way</div>
+          <div class="step-desc">One-on-one session to help you understand and use your insights effectively.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT FORM -->
+  <div class="form-section" id="contact">
+    <div class="form-inner">
+      <div class="form-left" data-reveal>
+        <div class="section-tag" style="color:var(--accent);">Free consultation</div>
+        <h2>Tell me about<br>your <em>business.</em></h2>
+        <p>No pitch, no pressure. I'll review your data situation and tell you honestly whether a dashboard would make a
+          difference for you.</p>
+        <div class="form-perks">
+          <div class="perk">Free 30-minute audit call</div>
+          <div class="perk">No technical knowledge needed</div>
+          <div class="perk">Get a sample dashboard mockup</div>
+          <div class="perk">Your data is safe. We don't share our clients data anywhere</div>
+		  <div class="perk">Pricing shared upfront, no surprises</div>
+        </div>
+      </div>
+
+      <div class="form-right" data-reveal>
+        <div id="contact-form">
+          <div class="form-group">
+            <label>Your name</label>
+            <input type="text" id="f-name" placeholder="Ravi Kumar">
+          </div>
+          <div class="form-group">
+            <label>Business / Company</label>
+            <input type="text" id="f-biz" placeholder="What do you do?">
+          </div>
+          <div class="form-group">
+            <label>WhatsApp / Phone</label>
+            <input type="tel" id="f-phone" placeholder="+91 98765 43210" oninput="this.value = this.value.replace(/[^0-9+\s\-]/g, '');" maxlength="16">
+          </div>
+          <div class="form-group">
+            <label>Email ID</label>
+            <input type="email" id="f-email" placeholder="you@company.com">
+          </div>
+          <div class="form-group">
+            <label>What would you like to track? (optional)</label>
+            <textarea id="f-goal"
+              placeholder="e.g. monthly sales by region, stock levels, team performance..."></textarea>
+          </div>
+          <button class="submit-btn" onclick="handleSubmit()">Book my free audit →</button>
+          <p class="form-note">Responses typically within 24 hours · Hyderabad & remote</p>
+        </div>
+
+        <div class="success-msg" id="success-msg">
+          <div class="check">✓</div>
+          <h3>Got it! I'll be in touch soon.</h3>
+          <p>Thank You for filling the form. We will get in touch with you as soon as possible. We Appreciate your patience.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 DataVisual · Guntur, Andhara Pradesh · Built to validate demand</p>
+  </footer>
+
+  <script>
+    // Steps section animation
+    const stepsContainer = document.getElementById('steps-container');
+    const stepEls = stepsContainer.querySelectorAll('.step');
+
+    const stepsObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Animate the progress line
+          setTimeout(() => stepsContainer.classList.add('line-animated'), 200);
+
+          // Stagger each step card
+          stepEls.forEach((step, i) => {
+            setTimeout(() => step.classList.add('step-visible'), 100 + i * 200);
+          });
+
+          stepsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    stepsObserver.observe(stepsContainer);
+    const revealEls = document.querySelectorAll('[data-reveal]');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // ══════════════════════════════════════════════════════════
+    //  Google Apps Script — METHOD 1 Integration
+    //  👉 Paste your deployed Web App URL below (Step 4 of setup)
+    // ══════════════════════════════════════════════════════════
+    const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwAx3nDSDqMWc2S89CQ44DOr3ase1uWpIHtObzfqZ9EUnv8wg5kBUE7bx11mruqeCGyfw/exec';
+
+    async function handleSubmit() {
+      const name = document.getElementById('f-name').value.trim();
+      const biz = document.getElementById('f-biz').value.trim();
+      
+      let rawPhone = document.getElementById('f-phone').value.trim();
+      if (rawPhone.startsWith('+91')) {
+        rawPhone = rawPhone.substring(3);
+      }
+      const phone = rawPhone.replace(/\D/g, '');
+      
+      const email = document.getElementById('f-email').value.trim();
+      const goal = document.getElementById('f-goal').value.trim();
+
+      // ── Validation ──
+      if (!name) {
+        showFieldError('f-name', 'Please enter your name.');
+        return;
+      }
+      if (!phone) {
+        showFieldError('f-phone', 'Please enter your WhatsApp / phone number.');
+        return;
+      }
+      if (phone.length !== 10) {
+        showFieldError('f-phone', 'Please enter a valid 10-digit phone number.');
+        return;
+      }
+      if (email && !isValidEmail(email)) {
+        showFieldError('f-email', 'Please enter a valid email address.');
+        return;
+      }
+
+      const btn = document.querySelector('.submit-btn');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      const payload = {
+        name,
+        biz,
+        phone,
+        email,
+        goal,
+        timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+      };
+
+      // ── Send to Google Sheet ──
+      if (SHEET_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+        try {
+          await fetch(SHEET_URL, {
+            method: 'POST',
+            mode: 'no-cors',           // Google Apps Script requires no-cors
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        } catch (err) {
+          console.warn('Sheet submission error (may still have succeeded):', err);
+        }
+      } else {
+        // URL not set yet — log to console during development
+        console.log('📋 Form payload (paste your SHEET_URL to activate):', payload);
+      }
+
+      // ── Show success ──
+      document.getElementById('contact-form').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+
+      btn.disabled = false;
+      btn.textContent = 'Book my free audit →';
+    }
+
+    // ── Helpers ──
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function showFieldError(fieldId, message) {
+      const field = document.getElementById(fieldId);
+      field.focus();
+      field.style.borderColor = '#e05c2a';
+      field.style.boxShadow = '0 0 0 2px rgba(224,92,42,0.25)';
+
+      // Remove existing error tip if any
+      const existing = field.parentNode.querySelector('.field-error');
+      if (existing) existing.remove();
+
+      const tip = document.createElement('p');
+      tip.className = 'field-error';
+      tip.textContent = message;
+      tip.style.cssText = 'color:#e05c2a;font-size:12px;margin-top:5px;';
+      field.parentNode.appendChild(tip);
+
+      field.addEventListener('input', () => {
+        field.style.borderColor = '';
+        field.style.boxShadow = '';
+        tip.remove();
+      }, { once: true });
+    }
+  </script>
+</body>
+
+</html>
