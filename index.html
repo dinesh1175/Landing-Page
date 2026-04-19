@@ -1898,7 +1898,7 @@
           <div class="perk">No technical knowledge needed</div>
           <div class="perk">Get a sample dashboard mockup</div>
           <div class="perk">Your data is safe. We don't share our clients data anywhere</div>
-		  <div class="perk">Pricing shared upfront, no surprises</div>
+          <div class="perk">Pricing shared upfront, no surprises</div>
         </div>
       </div>
 
@@ -1914,11 +1914,7 @@
           </div>
           <div class="form-group">
             <label>WhatsApp / Phone</label>
-<<<<<<< HEAD
-            <input type="tel" id="f-phone" placeholder="+91 98765 43210" oninput="this.value = this.value.replace(/[^0-9+\s\-]/g, '');" maxlength="16">
-=======
             <input type="tel" id="f-phone" placeholder="+91 98765 43210">
->>>>>>> 4036b70562489de4638dd1ec5a42f68cadd89680
           </div>
           <div class="form-group">
             <label>Email ID</label>
@@ -1936,7 +1932,8 @@
         <div class="success-msg" id="success-msg">
           <div class="check">✓</div>
           <h3>Got it! I'll be in touch soon.</h3>
-          <p>Thank You for filling the form. We will get in touch with you as soon as possible. We Appreciate your patience.</p>
+          <p>Thank You for filling the form. We will get in touch with you as soon as possible. We Appreciate your
+            patience.</p>
         </div>
       </div>
     </div>
@@ -1954,114 +1951,80 @@
     const stepsObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // Animate the progress line
           setTimeout(() => stepsContainer.classList.add('line-animated'), 200);
-
-          // Stagger each step card
           stepEls.forEach((step, i) => {
             setTimeout(() => step.classList.add('step-visible'), 100 + i * 200);
           });
-
           stepsObserver.unobserve(entry.target);
         }
       });
     }, { threshold: 0.2 });
 
     stepsObserver.observe(stepsContainer);
+
+    // ── FIX: Reveal elements already in viewport on load, stagger others on scroll ──
     const revealEls = document.querySelectorAll('[data-reveal]');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('visible'), i * 80);
-          observer.unobserve(e.target);
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const idx = Array.from(revealEls).indexOf(entry.target);
+          setTimeout(() => entry.target.classList.add('visible'), idx * 80);
+          revealObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
-    revealEls.forEach(el => observer.observe(el));
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
 
-    // ══════════════════════════════════════════════════════════
-    //  Google Apps Script — METHOD 1 Integration
-    //  👉 Paste your deployed Web App URL below (Step 4 of setup)
-    // ══════════════════════════════════════════════════════════
+    revealEls.forEach((el, i) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom >= 0) {
+        setTimeout(() => el.classList.add('visible'), 100 + i * 100);
+      } else {
+        revealObserver.observe(el);
+      }
+    });
+
     const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwAx3nDSDqMWc2S89CQ44DOr3ase1uWpIHtObzfqZ9EUnv8wg5kBUE7bx11mruqeCGyfw/exec';
 
     async function handleSubmit() {
       const name = document.getElementById('f-name').value.trim();
       const biz = document.getElementById('f-biz').value.trim();
-<<<<<<< HEAD
-      
-      let rawPhone = document.getElementById('f-phone').value.trim();
-      if (rawPhone.startsWith('+91')) {
-        rawPhone = rawPhone.substring(3);
-      }
-      const phone = rawPhone.replace(/\D/g, '');
-      
-=======
       const phone = document.getElementById('f-phone').value.trim();
->>>>>>> 4036b70562489de4638dd1ec5a42f68cadd89680
       const email = document.getElementById('f-email').value.trim();
       const goal = document.getElementById('f-goal').value.trim();
 
-      // ── Validation ──
-      if (!name) {
-        showFieldError('f-name', 'Please enter your name.');
-        return;
-      }
-      if (!phone) {
-        showFieldError('f-phone', 'Please enter your WhatsApp / phone number.');
-        return;
-      }
-<<<<<<< HEAD
-      if (phone.length !== 10) {
-        showFieldError('f-phone', 'Please enter a valid 10-digit phone number.');
-        return;
-      }
-=======
->>>>>>> 4036b70562489de4638dd1ec5a42f68cadd89680
-      if (email && !isValidEmail(email)) {
-        showFieldError('f-email', 'Please enter a valid email address.');
-        return;
-      }
+      if (!name) { showFieldError('f-name', 'Please enter your name.'); return; }
+      if (!phone) { showFieldError('f-phone', 'Please enter your WhatsApp / phone number.'); return; }
+      if (email && !isValidEmail(email)) { showFieldError('f-email', 'Please enter a valid email address.'); return; }
 
       const btn = document.querySelector('.submit-btn');
       btn.disabled = true;
       btn.textContent = 'Sending…';
 
       const payload = {
-        name,
-        biz,
-        phone,
-        email,
-        goal,
+        name, biz, phone, email, goal,
         timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
       };
 
-      // ── Send to Google Sheet ──
       if (SHEET_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
         try {
           await fetch(SHEET_URL, {
             method: 'POST',
-            mode: 'no-cors',           // Google Apps Script requires no-cors
+            mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
           });
         } catch (err) {
-          console.warn('Sheet submission error (may still have succeeded):', err);
+          console.warn('Sheet submission error:', err);
         }
-      } else {
-        // URL not set yet — log to console during development
-        console.log('📋 Form payload (paste your SHEET_URL to activate):', payload);
       }
 
-      // ── Show success ──
       document.getElementById('contact-form').style.display = 'none';
       document.getElementById('success-msg').style.display = 'block';
-
       btn.disabled = false;
       btn.textContent = 'Book my free audit →';
     }
 
-    // ── Helpers ──
     function isValidEmail(email) {
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
@@ -2071,17 +2034,13 @@
       field.focus();
       field.style.borderColor = '#e05c2a';
       field.style.boxShadow = '0 0 0 2px rgba(224,92,42,0.25)';
-
-      // Remove existing error tip if any
       const existing = field.parentNode.querySelector('.field-error');
       if (existing) existing.remove();
-
       const tip = document.createElement('p');
       tip.className = 'field-error';
       tip.textContent = message;
       tip.style.cssText = 'color:#e05c2a;font-size:12px;margin-top:5px;';
       field.parentNode.appendChild(tip);
-
       field.addEventListener('input', () => {
         field.style.borderColor = '';
         field.style.boxShadow = '';
