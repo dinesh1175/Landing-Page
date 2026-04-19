@@ -1914,7 +1914,11 @@
           </div>
           <div class="form-group">
             <label>WhatsApp / Phone</label>
+<<<<<<< HEAD
             <input type="tel" id="f-phone" placeholder="+91 98765 43210" oninput="this.value = this.value.replace(/[^0-9+\s\-]/g, '');" maxlength="16">
+=======
+            <input type="tel" id="f-phone" placeholder="+91 98765 43210">
+>>>>>>> 4036b70562489de4638dd1ec5a42f68cadd89680
           </div>
           <div class="form-group">
             <label>Email ID</label>
@@ -1984,6 +1988,7 @@
     async function handleSubmit() {
       const name = document.getElementById('f-name').value.trim();
       const biz = document.getElementById('f-biz').value.trim();
+<<<<<<< HEAD
       
       let rawPhone = document.getElementById('f-phone').value.trim();
       if (rawPhone.startsWith('+91')) {
@@ -1991,6 +1996,9 @@
       }
       const phone = rawPhone.replace(/\D/g, '');
       
+=======
+      const phone = document.getElementById('f-phone').value.trim();
+>>>>>>> 4036b70562489de4638dd1ec5a42f68cadd89680
       const email = document.getElementById('f-email').value.trim();
       const goal = document.getElementById('f-goal').value.trim();
 
@@ -2003,10 +2011,13 @@
         showFieldError('f-phone', 'Please enter your WhatsApp / phone number.');
         return;
       }
+<<<<<<< HEAD
       if (phone.length !== 10) {
         showFieldError('f-phone', 'Please enter a valid 10-digit phone number.');
         return;
       }
+=======
+>>>>>>> 4036b70562489de4638dd1ec5a42f68cadd89680
       if (email && !isValidEmail(email)) {
         showFieldError('f-email', 'Please enter a valid email address.');
         return;
