@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms & Conditions — DataVisual</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --ink: #0f0e0c;
+      --paper: #f5f2ec;
+      --accent: #f0a500;
+      --accent2: #e05c2a;
+      --muted: #7a7670;
+      --border: rgba(15, 14, 12, 0.12);
+      --card: #fff;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(245, 242, 236, .9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -.5px;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .logo span {
+      color: var(--accent2);
+    }
+
+    .nav-cta {
+      background: var(--ink);
+      color: var(--paper);
+      border: none;
+      padding: 10px 22px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: .15s;
+      text-decoration: none;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent2);
+    }
+
+    .page-hero {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 60px 48px;
+      text-align: center;
+    }
+
+    .page-hero .tag {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--ink);
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .page-hero h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      margin-bottom: 12px;
+    }
+
+    .page-hero h1 em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .page-hero p {
+      color: rgba(245, 242, 236, .55);
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    .content {
+      max-width: 780px;
+      margin: 60px auto;
+      padding: 0 48px 80px;
+    }
+
+    .section-block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 36px;
+      margin-bottom: 20px;
+    }
+
+    .section-block h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -.3px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-block h2 .icon {
+      width: 32px;
+      height: 32px;
+      background: var(--accent);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .section-block p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 10px;
+    }
+
+    .section-block p:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-block ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .section-block ul li {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .section-block ul li::before {
+      content: '✓';
+      width: 20px;
+      height: 20px;
+      background: var(--accent);
+      color: var(--ink);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .section-block ul li.cross::before {
+      content: '✕';
+      background: #f87171;
+    }
+
+    .highlight-box {
+      background: rgba(240, 165, 0, .08);
+      border: 1px solid rgba(240, 165, 0, .25);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-top: 14px;
+    }
+
+    .highlight-box p {
+      color: var(--ink) !important;
+      font-weight: 500;
+      margin: 0 !important;
+    }
+
+    .highlight-box a {
+      color: var(--accent2);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .highlight-box a:hover {
+      text-decoration: underline;
+    }
+
+    .updated-date {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 32px;
+      padding: 10px 20px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .col-box {
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .col-box.green {
+      background: rgba(74, 222, 128, .08);
+      border: 1px solid rgba(74, 222, 128, .2);
+    }
+
+    .col-box.red {
+      background: rgba(248, 113, 113, .08);
+      border: 1px solid rgba(248, 113, 113, .2);
+    }
+
+    .col-box h4 {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .col-box.green h4 {
+      color: #16a34a;
+    }
+
+    .col-box.red h4 {
+      color: #dc2626;
+    }
+
+    .col-box ul {
+      gap: 6px !important;
+    }
+
+    .col-box ul li {
+      font-size: 13px !important;
+    }
+
+    .col-box.green ul li::before {
+      content: '✓';
+      background: #4ade80;
+      width: 16px !important;
+      height: 16px !important;
+      font-size: 9px !important;
+    }
+
+    .col-box.red ul li::before {
+      content: '✕';
+      background: #f87171;
+      width: 16px !important;
+      height: 16px !important;
+      font-size: 9px !important;
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 48px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--accent2);
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 16px 20px;
+      }
+
+      .page-hero {
+        padding: 48px 20px;
+      }
+
+      .content {
+        padding: 0 20px 60px;
+        margin: 40px auto;
+      }
+
+      .section-block {
+        padding: 24px 20px;
+      }
+
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="logo">data<span>visual</span></a>
+    <a href="/#contact" class="nav-cta">Get a free audit →</a>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="tag">Legal</div>
+    <h1>Terms & <em>Conditions</em></h1>
+    <p>Please read these terms carefully before using our services</p>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <div class="updated-date">
+      📅 Last updated: April 24, 2026 · Effective immediately
+    </div>
+
+    <!-- Intro -->
+    <div class="section-block">
+      <h2><span class="icon">👋</span> Introduction</h2>
+      <p>These Terms & Conditions govern your use of DataVisual's services, operated by Dinesh Kumar, based in Guntur,
+        Andhra Pradesh, India.</p>
+      <p>By submitting the contact form, booking a free audit, or engaging our services, you agree to these terms. If
+        you do not agree, please do not use our services.</p>
+      <p>For any questions, contact us at <a href="mailto:dinesh86952@gmail.com"
+          style="color:var(--accent2);font-weight:600;">dinesh86952@gmail.com</a></p>
+    </div>
+
+    <!-- Services -->
+    <div class="section-block">
+      <h2><span class="icon">📊</span> Our Services</h2>
+      <p>DataVisual provides freelance Power BI dashboard design and data visualisation services, including:</p>
+      <ul>
+        <li>Custom Power BI dashboard design and development</li>
+        <li>Data cleaning and preparation from Excel, CSV, Google Sheets or databases</li>
+        <li>Sales, operations, finance and KPI reporting dashboards</li>
+        <li>One-on-one Live session after delivery</li>
+        <li>Free initial consultation and audit call</li>
+      </ul>
+    </div>
+
+    <!-- What's included -->
+    <div class="section-block">
+      <h2><span class="icon">✅</span> What's Included & Not Included</h2>
+      <p>To avoid any confusion, here is a clear breakdown of what each project covers:</p>
+      <div class="two-col">
+        <div class="col-box green">
+          <h4>✓ Included</h4>
+          <ul>
+            <li>Custom dashboard design</li>
+            <li>Data cleaning & prep</li>
+            <li>Interactive filters & slicers</li>
+            <li>Up to 2 revision rounds</li>
+            <li>one-on-one live session</li>
+            <li>Delivery within 48 hours</li>
+          </ul>
+        </div>
+        <div class="col-box red">
+          <h4>✕ Not Included</h4>
+          <ul>
+            <li>Power BI Pro license</li>
+            <li>Hosting or cloud setup</li>
+            <li>Ongoing maintenance</li>
+            <li>Raw data collection</li>
+            <li>Major scope changes mid-project</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment -->
+    <div class="section-block">
+      <h2><span class="icon">💰</span> Pricing & Payment</h2>
+      <p>Pricing is discussed and agreed upon during the free consultation call before any work begins. We believe in
+        complete transparency — no hidden charges, no surprises.</p>
+      <ul>
+        <li>Pricing is shared upfront before project starts</li>
+        <li>50% advance payment required to begin work</li>
+        <li>Remaining 50% due upon delivery and approval</li>
+        <li>Payment accepted via UPI, bank transfer or agreed method</li>
+        <li>All prices are in Indian Rupees (INR) unless stated otherwise</li>
+      </ul>
+      <div class="highlight-box">
+        <p>⚠️ Work will not begin until the advance payment is received and confirmed.</p>
+      </div>
+    </div>
+
+    <!-- Revisions -->
+    <div class="section-block">
+      <h2><span class="icon">🔄</span> Revisions & Changes</h2>
+      <p>We want you to be completely happy with your dashboard. Here is our revision policy:</p>
+      <ul>
+        <li>Up to <strong>2 rounds of revisions</strong> are included in every project</li>
+        <li>Revision requests must be submitted within 7 days of delivery</li>
+        <li>Revisions cover adjustments to existing design — not new features or scope changes</li>
+        <li>Additional revisions beyond 2 rounds will be charged separately</li>
+        <li>Major scope changes after project start may require revised pricing</li>
+      </ul>
+    </div>
+
+    <!-- Delivery -->
+    <div class="section-block">
+      <h2><span class="icon">⚡</span> Delivery Timeline</h2>
+      <p>We aim to deliver all dashboards within <strong>48 hours</strong> of receiving your data and confirmed payment.
+        However:</p>
+      <ul>
+        <li>Timeline begins after advance payment and complete data is received</li>
+        <li>Complex projects may require additional time — communicated upfront</li>
+        <li>Delays caused by incomplete or unclear data from the client are not our responsibility</li>
+        <li>We will always keep you updated on progress</li>
+      </ul>
+    </div>
+
+    <!-- Client responsibilities -->
+    <div class="section-block">
+      <h2><span class="icon">🤝</span> Client Responsibilities</h2>
+      <p>To ensure smooth project delivery, clients agree to:</p>
+      <ul>
+        <li>Provide accurate, complete data in a usable format</li>
+        <li>Respond to queries within a reasonable time (24-48 hours)</li>
+        <li>Clearly communicate requirements during the consultation call</li>
+        <li>Ensure they have the right to share any data provided to us</li>
+        <li>Not share our work as their own without permission</li>
+      </ul>
+    </div>
+
+    <!-- Data & Confidentiality -->
+    <div class="section-block">
+      <h2><span class="icon">🔒</span> Data & Confidentiality</h2>
+      <p>We take your data seriously. Any business data shared with us for dashboard creation is:</p>
+      <ul>
+        <li>Used exclusively for building your dashboard — nothing else</li>
+        <li>Never shared with third parties under any circumstances</li>
+        <li>Deleted from our systems upon project completion if requested</li>
+        <li>Handled with complete confidentiality and professionalism</li>
+      </ul>
+      <p style="margin-top:12px;">For full details on data handling, see our <a href="/privacy.html"
+          style="color:var(--accent2);font-weight:600;">Privacy Policy</a>.</p>
+    </div>
+
+    <!-- Refunds -->
+    <div class="section-block">
+      <h2><span class="icon">↩️</span> Refund Policy</h2>
+      <p>We are committed to your satisfaction. Our refund policy is as follows:</p>
+      <ul>
+        <li>If we are unable to deliver the agreed dashboard, a full refund will be issued</li>
+        <li>Advance payments are non-refundable once work has begun</li>
+        <li>If you are unsatisfied after delivery, we will first attempt to resolve through revisions</li>
+        <li>Refund disputes will be handled fairly and communicated openly</li>
+      </ul>
+      <div class="highlight-box">
+        <p>💬 If you have any concerns about your project, please contact us directly at <a
+            href="mailto:dinesh86952@gmail.com">dinesh86952@gmail.com</a> before raising a dispute.</p>
+      </div>
+    </div>
+
+    <!-- Intellectual Property -->
+    <div class="section-block">
+      <h2><span class="icon">©️</span> Intellectual Property</h2>
+      <p>Upon full payment, you own the final delivered dashboard (.pbix file) and all its contents.</p>
+      <ul>
+        <li>You are free to use, modify and share your dashboard as needed</li>
+        <li>DataVisual retains the right to display anonymised screenshots of work in our portfolio</li>
+        <li>If you do not want your work shown in our portfolio, please inform us in writing</li>
+        <li>Our design templates, code structures and methodologies remain our intellectual property</li>
+      </ul>
+    </div>
+
+    <!-- Limitation of liability -->
+    <div class="section-block">
+      <h2><span class="icon">⚖️</span> Limitation of Liability</h2>
+      <p>DataVisual provides dashboards based on the data supplied by the client. We are not responsible for:</p>
+      <ul>
+        <li>Business decisions made based on dashboard insights</li>
+        <li>Inaccurate results caused by incorrect client data</li>
+        <li>Any losses arising from use or misuse of the delivered dashboard</li>
+        <li>Technical issues caused by the client's own system or Power BI installation</li>
+      </ul>
+      <p style="margin-top:12px;">Our total liability in any circumstance is limited to the amount paid for the specific
+        project in question.</p>
+    </div>
+
+    <!-- Governing Law -->
+    <div class="section-block">
+      <h2><span class="icon">🏛️</span> Governing Law</h2>
+      <p>These Terms & Conditions are governed by the laws of India. Any disputes shall be subject to the jurisdiction
+        of courts in Guntur, Andhra Pradesh, India.</p>
+      <p>We will always attempt to resolve any disputes amicably before pursuing legal action.</p>
+    </div>
+
+    <!-- Changes to terms -->
+    <div class="section-block">
+      <h2><span class="icon">🔔</span> Changes to These Terms</h2>
+      <p>We reserve the right to update these Terms & Conditions at any time. Changes will be posted on this page with
+        an updated date. Continued use of our services after changes constitutes acceptance of the new terms.</p>
+    </div>
+
+    <!-- Contact -->
+    <div class="section-block">
+      <h2><span class="icon">📬</span> Contact Us</h2>
+      <p>For any questions about these Terms & Conditions:</p>
+      <div class="highlight-box">
+        <p>📧 Email: <a href="mailto:dinesh86952@gmail.com">dinesh86952@gmail.com</a><br>
+          📱 WhatsApp: <a href="tel:+919989965180">+91 99899 65180</a><br>
+          📍 Location: Guntur, Andhra Pradesh, India</p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2026 DataVisual · Guntur, Andhra Pradesh · <a href="/index.html">Home</a> · <a href="/privacy.html">Privacy
+        Policy</a></p>
+  </footer>
+
+</body>
+
+</html>
