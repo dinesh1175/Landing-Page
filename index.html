@@ -1571,6 +1571,472 @@
         padding: 60px 20px;
       }
     }
+
+    /* ═══════════════════════════════════════════
+       NEW SECTION: ABOUT ME
+       ═══════════════════════════════════════════ */
+    .about-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 48px 40px;
+    }
+
+    .about-inner {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 48px;
+      align-items: center;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-inner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--accent2), var(--accent));
+      border-radius: 4px 0 0 4px;
+    }
+
+    .about-avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+      box-shadow: 0 0 0 4px rgba(240, 165, 0, 0.2);
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+
+    .about-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      border-radius: 50%;
+      display: block;
+    }
+
+    @keyframes glowPulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 4px rgba(240, 165, 0, 0.2), 0 0 16px rgba(240, 165, 0, 0.15);
+      }
+
+      50% {
+        box-shadow: 0 0 0 6px rgba(240, 165, 0, 0.35), 0 0 28px rgba(240, 165, 0, 0.3);
+      }
+    }
+
+    @keyframes rotateDash {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .about-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      margin-bottom: 4px;
+    }
+
+    .about-role-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(240, 165, 0, 0.12);
+      color: var(--accent2);
+      border: 1px solid rgba(240, 165, 0, 0.25);
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .about-desc {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 620px;
+    }
+
+    .about-badges {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .about-badge {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .about-badge span {
+      font-size: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .about-section {
+        padding: 60px 20px 30px;
+      }
+
+      .about-inner {
+        grid-template-columns: 1fr;
+        padding: 32px 24px;
+        text-align: center;
+      }
+
+      .about-avatar {
+        margin: 0 auto;
+      }
+
+      .about-badges {
+        justify-content: center;
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       NEW SECTION: IMAGE SHOWCASE (SCROLLING MARQUEE)
+       ═══════════════════════════════════════════ */
+    .showcase-section {
+      padding: 60px 0;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .showcase-header {
+      max-width: 1100px;
+      margin: 0 auto 36px;
+      padding: 0 48px;
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marqueeScroll 30s linear infinite;
+      gap: 20px;
+      padding: 10px 0;
+    }
+
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes marqueeScroll {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .marquee-wrapper {
+      overflow: hidden;
+      /* mask the edges for a fade effect */
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    }
+
+    .showcase-card {
+      width: 280px;
+      height: 200px;
+      border-radius: 14px;
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+      border: 1px solid var(--border);
+      background: var(--card);
+      box-shadow: 0 4px 20px rgba(15, 14, 12, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .showcase-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 16px 40px rgba(15, 14, 12, 0.15);
+    }
+
+    .showcase-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Placeholder cards using gradient + icon (for when no real images are provided) */
+    .showcase-card-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .showcase-card-placeholder .ph-icon {
+      font-size: 36px;
+    }
+
+    .showcase-card-placeholder .ph-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-align: center;
+      padding: 0 16px;
+      line-height: 1.5;
+    }
+
+    .showcase-card-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 14px;
+      background: linear-gradient(to top, rgba(15, 14, 12, 0.7) 0%, transparent 100%);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .showcase-header {
+        padding: 0 20px;
+      }
+
+      .showcase-card {
+        width: 220px;
+        height: 160px;
+      }
+    }
+
+    .showcase-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: inherit;
+    }
+
+    /* ═══════════════════════════════════════════
+       NEW SECTION: TESTIMONIALS (SCROLLING MARQUEE)
+       ═══════════════════════════════════════════ */
+    .testimonials-section {
+      padding: 20px 0 40px;
+      overflow: hidden;
+    }
+
+    .testimonials-header {
+      max-width: 1100px;
+      margin: 0 auto 24px;
+      padding: 0 48px;
+    }
+
+    .testimonial-track {
+      display: flex;
+      width: max-content;
+      animation: marqueeScroll 35s linear infinite;
+      gap: 20px;
+    }
+
+    /* Reverse direction for testimonials for visual variety */
+    .testimonial-track.reverse {
+      animation: marqueeScrollReverse 35s linear infinite;
+    }
+
+    @keyframes marqueeScrollReverse {
+      0% {
+        transform: translateX(-50%);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    .testimonial-track:hover {
+      animation-play-state: paused;
+    }
+
+    .testimonial-card {
+      width: 320px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      flex-shrink: 0;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(15, 14, 12, 0.1);
+    }
+
+    .testimonial-stars {
+      color: var(--accent);
+      font-size: 13px;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .testimonial-text {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 18px;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .testimonial-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .testimonial-name {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    .testimonial-role {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .testimonial-quote-mark {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-size: 48px;
+      color: var(--accent);
+      opacity: 0.12;
+      font-family: Georgia, serif;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+      .testimonials-header {
+        padding: 0 20px;
+      }
+
+      .testimonial-card {
+        width: 270px;
+        padding: 20px;
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       NEW SECTION: CONTACT DETAILS (in form section)
+       ═══════════════════════════════════════════ */
+    .contact-details-strip {
+      margin-top: 32px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .contact-details-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: rgba(245, 242, 236, 0.4);
+      margin-bottom: 16px;
+    }
+
+    .contact-detail-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 12px;
+      margin-bottom: 10px;
+      transition: background 0.2s, border-color 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .contact-detail-item:hover {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(240, 165, 0, 0.35);
+    }
+
+    .contact-detail-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .contact-detail-icon.phone-icon {
+      background: rgba(74, 222, 128, 0.12);
+    }
+
+    .contact-detail-icon.email-icon {
+      background: rgba(240, 165, 0, 0.12);
+    }
+
+    .contact-detail-text-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(245, 242, 236, 0.4);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .contact-detail-value {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--paper);
+      letter-spacing: -0.2px;
+    }
   </style>
 </head>
 
@@ -1814,6 +2280,292 @@
     </div>
   </section>
 
+  <!-- ═══════════════════════════════════════════
+       NEW: ABOUT ME SECTION (above Image Showcase)
+       ═══════════════════════════════════════════ -->
+  <section class="about-section" aria-label="About Me">
+    <div class="about-inner" data-reveal>
+      <!-- Initials avatar -->
+      <div class="about-avatar" aria-hidden="true">
+        <img src="C:\Users\DINESH KUMAR\OneDrive\Documents\Documents\Proffesinal Img.png" alt="Dinesh Kumar" />
+      </div>
+
+      <div class="about-content">
+        <div class="about-role-tag">⚡ Power BI Enthusiast</div>
+        <div class="about-name">Dinesh Kumar</div>
+        <p class="about-desc">
+          A student-turned-freelancer Power BI enthusiast with strong knowledge in creating interactive dashboards
+          and data-driven insights. Has participated in intercollege competitions with over 50+ teams and secured
+          2nd place twice. Passionate about solving business problems using data.
+        </p>
+        <div class="about-badges">
+          <div class="about-badge"><span>🏆</span> 2× Runner-Up — Intercollege</div>
+          <div class="about-badge"><span>📊</span> Power BI Specialist</div>
+          <div class="about-badge"><span>🤝</span> 50+ Teams Competed</div>
+          <div class="about-badge"><span>🚀</span> Freelancer</div>
+        </div>
+      </div>
+    </div>
+  </section><!-- /About Me -->
+
+  <!-- ═══════════════════════════════════════════
+       NEW: IMAGE SHOWCASE SECTION (scrolling marquee, above Contact Form)
+       ═══════════════════════════════════════════ -->
+  <section class="showcase-section" aria-label="Work Showcase">
+    <div class="showcase-header" data-reveal>
+      <div class="section-tag">My Work & Achievements</div>
+      <h2>Dashboards &amp; Prize<br><em style="font-style:normal;color:var(--accent2)">Moments.</em></h2>
+    </div>
+
+    <div class="marquee-wrapper">
+      <div class="marquee-track" aria-label="Scrolling image gallery">
+
+        <!-- ── Card 1 ── -->
+        <div class="showcase-card">
+          <img
+            src="C:\Users\DINESH KUMAR\OneDrive\Documents\Mini Project Documents\Project images\Screenshot 2026-03-09 202313.png"
+            alt="Sales Dashboard FY26" class="showcase-card-img" />
+          <div class="showcase-card-overlay">Power BI · Sales Overview</div>
+        </div>
+
+        <!-- ── Card 2 ── -->
+        <div class="showcase-card">
+          <img
+            src="C:\Users\DINESH KUMAR\OneDrive\Documents\Mini Project Documents\Project images\Screenshot 2026-03-09 202328.png"
+            alt="2nd Place Intercollege 2024" class="showcase-card-img" />
+          <div class="showcase-card-overlay">Product Depth Analysis</div>
+        </div>
+
+        <!-- ── Card 3 ── -->
+        <div class="showcase-card">
+          <img
+            src="C:\Users\DINESH KUMAR\OneDrive\Documents\Mini Project Documents\Project images\Screenshot 2026-03-09 202344.png"
+            alt="Finance KPI Report" class="showcase-card-img" />
+          <div class="showcase-card-overlay">Profit by product analysis</div>
+        </div>
+
+        <!-- ── Card 4 ── -->
+        <div class="showcase-card">
+          <img src="C:\Users\DINESH KUMAR\OneDrive\Documents\Documents\1.jpeg" alt="2nd Place Intercollege 2025"
+            class="showcase-card-img" />
+          <div class="showcase-card-overlay">Achievement · Winner</div>
+        </div>
+
+        <!-- ── Card 5 ── -->
+        <div class="showcase-card">
+          <img src="C:\Users\DINESH KUMAR\OneDrive\Documents\Documents\2.jpeg" alt="Operations Dashboard"
+            class="showcase-card-img" />
+          <div class="showcase-card-overlay">Power BI · Presentation</div>
+        </div>
+
+        <!-- ── Card 6 ── -->
+        <div class="showcase-card">
+          <img src="C:\Users\DINESH KUMAR\OneDrive\Documents\Documents\4.jpeg" alt="Inventory Tracker"
+            class="showcase-card-img" />
+          <div class="showcase-card-overlay">Achievement · Runner-Up</div>
+        </div>
+
+        <!-- ── Card 7 ── -->
+        <div class="showcase-card">
+          <img src="C:\Users\DINESH KUMAR\OneDrive\Documents\Documents\3.jpeg" alt="Team Competition Moment"
+            class="showcase-card-img" />
+          <div class="showcase-card-overlay">Providing - Insights</div>
+        </div>
+        <!-- ── Card 8 ── -->
+        <div class="showcase-card">
+          <img src="C:\Users\DINESH KUMAR\OneDrive\Documents\Documents\6.jpeg" alt="Team Competition Moment"
+            class="showcase-card-img" />
+          <div class="showcase-card-overlay">Competition · Certificate</div>
+        </div>
+
+        <!-- ── Duplicate set for seamless loop ── -->
+        <div class="showcase-card">
+          <img
+            src="C:\Users\DINESH KUMAR\OneDrive\Documents\Mini Project Documents\Project images\Screenshot 2026-03-09 202313.png"
+            alt="Sales Dashboard FY26" class="showcase-card-img" />
+          <div class="showcase-card-overlay">Power BI · Sales Overview</div>
+        </div>
+        <div class="showcase-card">
+          <img
+            src="C:\Users\DINESH KUMAR\OneDrive\Documents\Mini Project Documents\Project images\Screenshot 2026-03-09 202328.png"
+            alt="2nd Place Intercollege 2024" class="showcase-card-img" />
+          <div class="showcase-card-overlay">Product Depth Analysis</div>
+        </div>
+        <div class="showcase-card">
+          <img
+            src="C:\Users\DINESH KUMAR\OneDrive\Documents\Mini Project Documents\Project images\Screenshot 2026-03-09 202344.png"
+            alt="Finance KPI Report" class="showcase-card-img" />
+          <div class="showcase-card-overlay">Profit by product analysis</div>
+        </div>
+        <div class="showcase-card">
+          <img src="C:\Users\DINESH KUMAR\OneDrive\Documents\Documents\1.jpeg" alt="2nd Place Intercollege 2025"
+            class="showcase-card-img" />
+          <div class="showcase-card-overlay">Achievement · Winner</div>
+        </div>
+        <div class="showcase-card">
+          <img src="C:\Users\DINESH KUMAR\OneDrive\Documents\Documents\2.jpeg" alt="Operations Dashboard"
+            class="showcase-card-img" />
+          <div class="showcase-card-overlay">Power BI · Presentation</div>
+        </div>
+        <div class="showcase-card">
+          <img src="C:\Users\DINESH KUMAR\OneDrive\Documents\Documents\4.jpeg" alt="Inventory Tracker"
+            class="showcase-card-img" />
+          <div class="showcase-card-overlay">Achievement · Runner-Up</div>
+        </div>
+        <div class="showcase-card">
+          <img src="C:\Users\DINESH KUMAR\OneDrive\Documents\Documents\3.jpeg" alt="Team Competition Moment"
+            class="showcase-card-img" />
+          <div class="showcase-card-overlay">Providing - Insights</div>
+        </div>
+        <div class="showcase-card">
+          <img src="" C:\Users\DINESH KUMAR\OneDrive\Documents\Documents\6.jpeg"" alt="Team Competition Moment"
+            class="showcase-card-img" />
+          <div class="showcase-card-overlay">Competition · Certificate</div>
+        </div>
+
+      </div><!-- /marquee-track -->
+    </div><!-- /marquee-wrapper -->
+  </section><!-- /Image Showcase -->
+
+  <!-- ═══════════════════════════════════════════
+       NEW: TESTIMONIALS SECTION (below Image Showcase)
+       ═══════════════════════════════════════════ -->
+  <section class="testimonials-section" aria-label="Client Testimonials">
+    <div class="testimonials-header" data-reveal>
+      <div class="section-tag">What Clients Say</div>
+      <h2>Kind words from<br><em style="font-style:normal;color:var(--accent2)">happy clients.</em></h2>
+    </div>
+
+    <!-- Row: scrolls right (reverse) -->
+    <div class="marquee-wrapper">
+      <div class="testimonial-track reverse">
+
+        <!-- Testimonial A -->
+        <div class="testimonial-card">
+          <div class="testimonial-quote-mark">"</div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"During my Infosys Spring Boot virtual internship in Data Visualization, Dinesh
+            helped me resolve dashboard doubts with clear guidance. His support was key to completing my internship
+            successfully"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" style="background:linear-gradient(135deg,#fb923c,#dc2626);">MM</div>
+            <div>
+              <div class="testimonial-name">Mounika Mogalapalli</div>
+              <div class="testimonial-role">Student, R.V.R & J.C CE</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial B -->
+        <div class="testimonial-card">
+          <div class="testimonial-quote-mark">"</div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Dinesh provided valuable data insights that helped us better understand customer
+            behavior. His dashboards are simple, effective, and business-focused. Looking forward to working with him
+            again."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" style="background:linear-gradient(135deg,#f472b6,#9d174d);">ST</div>
+            <div>
+              <div class="testimonial-name">Surya Teja</div>
+              <div class="testimonial-role">Owner, Cafe Solutions</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial C -->
+        <div class="testimonial-card">
+          <div class="testimonial-quote-mark">"</div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Working with Dinesh as a teammate gave me great insights into data-driven
+            decision making. His approach to analysis is practical and clear, helping us better understand and improve
+            our winning chances."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" style="background:linear-gradient(135deg,#34d399,#059669);">PS</div>
+            <div>
+              <div class="testimonial-name">Pardha Saradhi</div>
+              <div class="testimonial-role">Teammate</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial D -->
+        <div class="testimonial-card">
+          <div class="testimonial-quote-mark">"</div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Dinesh developed an impressive mini project showcasing a high-performance data
+            dashboard with Azure Cloud integration. His ability to turn data into clear, meaningful insights reflects
+            strong end-to-end expertise"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" style="background:linear-gradient(135deg,#60a5fa,#1d4ed8);">Dr</div>
+            <div>
+              <div class="testimonial-name">Dr.Vallabhajosyula Sasikala</div>
+              <div class="testimonial-role">Associate Professor, R.V.R & J.C CE</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Duplicates for seamless loop -->
+        <div class="testimonial-card">
+          <div class="testimonial-quote-mark">"</div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"During my Infosys Spring Boot virtual internship in Data Visualization, Dinesh
+            helped me resolve dashboard doubts with clear guidance. His support was key to completing my internship
+            successfully"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" style="background:linear-gradient(135deg,#fb923c,#dc2626);">MM</div>
+            <div>
+              <div class="testimonial-name">Mounika Mogalapalli</div>
+              <div class="testimonial-role">Student, R.V.R & J.C CE</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote-mark">"</div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Dinesh provided valuable data insights that helped us better understand customer
+            behavior. His dashboards are simple, effective, and business-focused. Looking forward to working with him
+            again."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" style="background:linear-gradient(135deg,#f472b6,#9d174d);">ST</div>
+            <div>
+              <div class="testimonial-name">Surya Teja</div>
+              <div class="testimonial-role">Owner, Cafe Solutions</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote-mark">"</div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Working with Dinesh as a teammate gave me great insights into data-driven
+            decision making. His approach to analysis is practical and clear, helping us better understand and improve
+            our winning chances."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" style="background:linear-gradient(135deg,#34d399,#059669);">PS</div>
+            <div>
+              <div class="testimonial-name">Pardha Saradhi</div>
+              <div class="testimonial-role">Teammate</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote-mark">"</div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Dinesh developed an impressive mini project showcasing a high-performance data
+            dashboard with Azure Cloud integration. His ability to turn data into clear, meaningful insights reflects
+            strong end-to-end expertise."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" style="background:linear-gradient(135deg,#60a5fa,#1d4ed8);">Dr</div>
+            <div>
+              <div class="testimonial-name">Dr.Vallabhajosyula Sasikala</div>
+              <div class="testimonial-role">Associate Professor, R.V.R & J.C CE</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /testimonial-track reverse -->
+    </div><!-- /marquee-wrapper -->
+  </section><!-- /Testimonials -->
+
   <!-- SERVICES -->
   <section class="section">
     <div class="section-tag" data-reveal>What I do</div>
@@ -1900,6 +2652,31 @@
           <div class="perk">Your data is safe. We don't share our clients data anywhere</div>
           <div class="perk">Pricing shared upfront, no surprises</div>
         </div>
+
+        <!-- ═══════════════════════════════════════════
+             NEW: CONTACT DETAILS (phone & email)
+             ═══════════════════════════════════════════ -->
+        <div class="contact-details-strip">
+          <div class="contact-details-label">Reach me directly</div>
+
+          <!-- Phone -->
+          <a class="contact-detail-item" href="tel:+919876543210" aria-label="Call Dinesh Kumar">
+            <div class="contact-detail-icon phone-icon">📞</div>
+            <div>
+              <div class="contact-detail-text-label">Phone / WhatsApp</div>
+              <div class="contact-detail-value">+91 99899 65180</div>
+            </div>
+          </a>
+
+          <!-- Email -->
+          <a class="contact-detail-item" href="mailto:dineshkumar@example.com" aria-label="Email Dinesh Kumar">
+            <div class="contact-detail-icon email-icon">✉️</div>
+            <div>
+              <div class="contact-detail-text-label">Email ID</div>
+              <div class="contact-detail-value">dinesh86952@gmail.com</div>
+            </div>
+          </a>
+        </div><!-- /contact-details-strip -->
       </div>
 
       <div class="form-right" data-reveal>
@@ -1926,7 +2703,7 @@
               placeholder="e.g. monthly sales by region, stock levels, team performance..."></textarea>
           </div>
           <button class="submit-btn" onclick="handleSubmit()">Book my free audit →</button>
-          <p class="form-note">Responses typically within 24 hours · Hyderabad & remote</p>
+          <p class="form-note">Responses typically within 24 hours</p>
         </div>
 
         <div class="success-msg" id="success-msg">
