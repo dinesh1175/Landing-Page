@@ -2099,6 +2099,110 @@
       color: var(--paper);
       letter-spacing: -0.2px;
     }
+
+    /* ═══════════════════════════════════════════
+       VIDEO SECTION
+       ═══════════════════════════════════════════ */
+    .video-section {
+      padding: 60px 48px 70px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .video-section-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .video-section-header .section-tag {
+      margin-bottom: 12px;
+    }
+
+    .video-section-header h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .video-section-header p {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .video-outer {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow:
+        0 40px 100px rgba(15, 14, 12, 0.20),
+        0 0 0 1px var(--border);
+      background: #0f0e0c;
+    }
+
+    .video-outer video {
+      width: 100%;
+      display: block;
+      border-radius: 20px;
+    }
+
+    /* Custom play overlay */
+    .video-play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15, 14, 12, 0.45);
+      cursor: pointer;
+      border-radius: 20px;
+      transition: background 0.3s;
+    }
+
+    .video-play-overlay:hover {
+      background: rgba(15, 14, 12, 0.3);
+    }
+
+    .video-play-btn {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--accent2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 32px rgba(224, 92, 42, 0.5);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .video-play-overlay:hover .video-play-btn {
+      transform: scale(1.1);
+      box-shadow: 0 12px 40px rgba(224, 92, 42, 0.65);
+    }
+
+    .video-play-btn svg {
+      margin-left: 5px;
+    }
+
+    .video-play-overlay.hidden {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .video-section {
+        padding: 40px 20px 50px;
+      }
+
+      .video-play-btn {
+        width: 56px;
+        height: 56px;
+      }
+    }
   </style>
 </head>
 
@@ -2369,6 +2473,42 @@
       </div>
     </div>
   </section><!-- /About Me -->
+
+  <!-- VIDEO SECTION -->
+  <section class="video-section" data-reveal>
+    <div class="video-section-header">
+      <div class="section-tag">See it in action</div>
+      <h2>Watch how data becomes <em style="font-style:normal;color:var(--accent2)">clarity.</em></h2>
+      <p>A quick look at how I turn raw numbers into dashboards that drive real business decisions.</p>
+    </div>
+
+    <div class="video-outer">
+      <video id="intro-video" preload="metadata" poster="">
+        <source src="mainclip.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <!-- Custom play overlay -->
+      <div class="video-play-overlay" id="video-overlay" onclick="playVideo()">
+        <div class="video-play-btn">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 3.87a1 1 0 0 1 1.514-.857l14 8.13a1 1 0 0 1 0 1.714l-14 8.13A1 1 0 0 1 5 20.13V3.87z"
+              fill="#fff" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function playVideo() {
+      const video = document.getElementById('intro-video');
+      const overlay = document.getElementById('video-overlay');
+      video.controls = true;
+      overlay.classList.add('hidden');
+      video.play();
+    }
+  </script>
 
   <!-- ═══════════════════════════════════════════
        NEW: IMAGE SHOWCASE SECTION (scrolling marquee, above Contact Form)
